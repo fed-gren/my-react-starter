@@ -1,4 +1,6 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -13,7 +15,13 @@ module.exports = {
 
   resolve: {
     // Add '.ts' and '.tsx' as resolvable extensions.
-    extensions: [".ts", ".tsx"]
+    extensions: [".ts", ".tsx", ".js", "jsx"]
+  },
+
+  devServer: {
+    contentBase: path.resolve("./build"),
+    index: "index.html",
+    port: 8080
   },
 
   module: {
@@ -43,5 +51,13 @@ module.exports = {
   externals: {
     react: "React",
     "react-dom": "ReactDOM"
-  }
+  },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
+      filename: "index.html"
+    }),
+    new CleanWebpackPlugin()
+  ]
 };

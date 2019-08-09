@@ -1,5 +1,12 @@
+const path = require("path");
+
 module.exports = {
   mode: "production",
+
+  output: {
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "build")
+  },
 
   // Enable sourcemaps for debugging webpack's output.
   devtool: "source-map",
